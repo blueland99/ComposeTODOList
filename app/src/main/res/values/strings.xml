@@ -2,4 +2,43 @@
     <string name="app_name">ComposeTODOList</string>
 
     <string name="next">다음</string>
+    <string name="cancel">취소</string>
+    <string name="confirm">확인</string>
+
+    <string name="empty_todo_value">할 일이 없네요.\n혹시 다음 목표는 ‘%s’인가요? %s</string>
+    <string name="empty_todo_value1">커피 한 잔 마시기</string>
+    <string name="empty_todo_value2">멍 때리기</string>
+    <string name="empty_todo_value3">스트레칭 하기</string>
+    <string name="empty_todo_value4">맛있는 간식 찾기</string>
+    <string name="empty_todo_value5">하늘 한번 올려다보기</string>
+    <string name="empty_todo_value6">자기 전에 독서 5분</string>
+    <string name="empty_todo_value7">산책 나가기</string>
+    <string name="empty_todo_value8">아무 노래나 듣기</string>
+    <string name="empty_todo_value9">옷장 정리하기</string>
+    <string name="empty_todo_value10">재미있는 영상 보기</string>
+    <string name="empty_todo_value11">달달한 간식 만들기</string>
+    <string name="empty_todo_value12">내일 계획 세우기</string>
+    <string name="empty_todo_value13">친구에게 안부 문자 보내기</string>
+    <string name="empty_todo_value14">좋은 글귀 찾아보기</string>
+    <string name="empty_todo_value15">가벼운 집안일 하기</string>
+
+    <string name="empty_todo_emoji1">☕️</string>
+    <string name="empty_todo_emoji2">😌</string>
+    <string name="empty_todo_emoji3">🧘‍♂️</string>
+    <string name="empty_todo_emoji4">🍫</string>
+    <string name="empty_todo_emoji5">☁️</string>
+    <string name="empty_todo_emoji6">📖</string>
+    <string name="empty_todo_emoji7">🚶‍</string>
+    <string name="empty_todo_emoji8">🎧</string>
+    <string name="empty_todo_emoji9">(아주 가끔…)</string>
+    <string name="empty_todo_emoji10">📺</string>
+    <string name="empty_todo_emoji11">🍪</string>
+    <string name="empty_todo_emoji12">📝</string>
+    <string name="empty_todo_emoji13">💬</string>
+    <string name="empty_todo_emoji14">📜</string>
+    <string name="empty_todo_emoji15">🧹</string>
+
+    <string name="input_title">새로운 할 일</string>
+    <string name="input_hint">할 일을 입력해주세요.</string>
+    <string name="input_hint_toast">할 일을 입력해주세요.</string>
 </resources>
