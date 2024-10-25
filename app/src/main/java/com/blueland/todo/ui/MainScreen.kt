@@ -101,13 +101,6 @@ fun MainScreen(
         stringResource(R.string.empty_todo_emoji15),
     )
 
-    // 리스트에서 랜덤 인덱스를 가져옴
-    val randomIndex = remember { emptyTextList.indices.random() }
-
-    // 랜덤 텍스트와 이모지 선택
-    val emptyText = emptyTextList[randomIndex]
-    val emptyEmoji = emptyEmojiList[randomIndex]
-
     Scaffold(
         containerColor = LocalColors.current.background,
         content = { paddingValues ->
@@ -121,6 +114,13 @@ fun MainScreen(
             )
 
             if (items.isEmpty()) {
+                // 리스트에서 랜덤 인덱스를 가져옴
+                val randomIndex = remember { emptyTextList.indices.random() }
+
+                // 랜덤 텍스트와 이모지 선택
+                val emptyText = emptyTextList[randomIndex]
+                val emptyEmoji = emptyEmojiList[randomIndex]
+
                 Box(
                     modifier = Modifier
                         .padding(paddingValues)
