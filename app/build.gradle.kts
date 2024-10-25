@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     kotlin("kapt") // Kapt 플러그인
     alias(libs.plugins.hilt) // Hilt 플러그인
+    id("com.google.gms.google-services") // Firebase 서비스 플러그인
 }
 
 android {
@@ -14,7 +15,7 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -80,4 +81,8 @@ dependencies {
 
     // Hilt Navigation Compose 의존성 (hiltViewModel을 사용하기 위해 필요)
     implementation(libs.androidx.hilt.navigation.compose)
+
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.config.ktx)
 }

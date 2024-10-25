@@ -22,9 +22,12 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -38,6 +41,8 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.blueland.todo.R
 import com.blueland.todo.data.local.TodoEntity
 import com.blueland.todo.enums.DialogType
+import com.blueland.todo.enums.UpdateStatus
+import com.blueland.todo.managers.AppUpdateManager
 import com.blueland.todo.ui.theme.LocalColors
 import com.blueland.todo.ui.theme.LocalTextStyles
 import com.blueland.todo.ui.theme.ui.theme.LocalShapes
@@ -49,11 +54,57 @@ import kotlin.system.exitProcess
 @Composable
 fun MainScreen(
     viewModel: MainViewModel = hiltViewModel(),
+    dialogViewModel: DialogViewModel = hiltViewModel(),
     inputDialogViewModel: InputDialogViewModel = hiltViewModel(),
 ) {
     val TAG = LocalContext.current.javaClass.simpleName
 
     val context = LocalContext.current
+
+    var updateStatus by remember { mutableStateOf(UpdateStatus.NONE) }
+
+    // 앱 실행 시 업데이트 상태 확인
+    LaunchedEffect(Unit) {
+        AppUpdateManager.checkForAppUpdate(context) { status ->
+            updateStatus = status
+        }
+    }
+
+    // UpdateStatus에 따른 다이얼로그 표시
+    when (updateStatus) {
+        UpdateStatus.REQUIRED -> {
+            dialogViewModel.showDialog(
+                dialogType = DialogType.ALERT,
+                title = stringResource(R.string.update_title),
+                content = stringResource(R.string.required_update_content),
+                onConfirm = {
+                    Log.d(TAG, "click AlertmDialog onConfirm")
+                    // 업데이트를 위해 스토어로 이동
+                    AppUpdateManager.openPlayStore(context)
+                }
+            )
+        }
+
+        UpdateStatus.RECOMMENDED -> {
+            dialogViewModel.showDialog(
+                dialogType = DialogType.CONFIRM,
+                title = stringResource(R.string.update_title),
+                content = stringResource(R.string.recommended_update_content),
+                onConfirm = {
+                    Log.d(TAG, "click ConfirmDialog onConfirm")
+                    // 업데이트를 위해 스토어로 이동
+                    AppUpdateManager.openPlayStore(context)
+                },
+                onDismiss = {
+                    Log.d(TAG, "click ConfirmDialog onDismiss")
+                }
+            )
+        }
+
+        UpdateStatus.NONE -> {
+            /* 업데이트 필요 없음 */
+        }
+    }
 
     // 뒤로가기 버튼
     BackHandler {
