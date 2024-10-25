@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    kotlin("kapt") // Kapt 플러그인
+    alias(libs.plugins.hilt) // Hilt 플러그인
 }
 
 android {
@@ -66,4 +68,16 @@ dependencies {
 
     // UI
     implementation(libs.accompanist.systemuicontroller)
+
+    // room
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    kapt(libs.room.compiler)
+
+    // Hilt 의존성
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+
+    // Hilt Navigation Compose 의존성 (hiltViewModel을 사용하기 위해 필요)
+    implementation(libs.androidx.hilt.navigation.compose)
 }
