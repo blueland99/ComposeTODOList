@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ComposeTODOList</string>
+    <string name="app_name">블루투두</string>
 
     <string name="next">다음</string>
     <string name="cancel">취소</string>
@@ -44,4 +44,8 @@
 
     <string name="delete_title">삭제하기</string>
     <string name="delete_content">할 일을 삭제하시겠습니까?</string>
+
+    <string name="update_title">업데이트 안내</string>
+    <string name="required_update_content">필수 업데이트가 필요합니다!</string>
+    <string name="recommended_update_content">새로운 버전으로 업데이트 하시겠습니까?</string>
 </resources>

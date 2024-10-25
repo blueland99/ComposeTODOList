@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">BlueTodo</string>
+
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="confirm">Confirm</string>
+
+    <string name="empty_todo_value">No tasks available.\nHow about a new goal: ‘%s’? %s</string>
+    <string name="empty_todo_value1">Have a cup of coffee</string>
+    <string name="empty_todo_value2">Zone out</string>
+    <string name="empty_todo_value3">Do some stretching</string>
+    <string name="empty_todo_value4">Find a tasty snack</string>
+    <string name="empty_todo_value5">Look up at the sky</string>
+    <string name="empty_todo_value6">Read for 5 minutes before bed</string>
+    <string name="empty_todo_value7">Go for a walk</string>
+    <string name="empty_todo_value8">Listen to any song</string>
+    <string name="empty_todo_value9">Organize the closet</string>
+    <string name="empty_todo_value10">Watch a fun video</string>
+    <string name="empty_todo_value11">Make a sweet snack</string>
+    <string name="empty_todo_value12">Plan for tomorrow</string>
+    <string name="empty_todo_value13">Text a friend</string>
+    <string name="empty_todo_value14">Find an inspiring quote</string>
+    <string name="empty_todo_value15">Do some light housework</string>
+
+    <string name="empty_todo_emoji1">☕️</string>
+    <string name="empty_todo_emoji2">😌</string>
+    <string name="empty_todo_emoji3">🧘‍♂️</string>
+    <string name="empty_todo_emoji4">🍫</string>
+    <string name="empty_todo_emoji5">☁️</string>
+    <string name="empty_todo_emoji6">📖</string>
+    <string name="empty_todo_emoji7">🚶‍</string>
+    <string name="empty_todo_emoji8">🎧</string>
+    <string name="empty_todo_emoji9">(Only occasionally…)</string>
+    <string name="empty_todo_emoji10">📺</string>
+    <string name="empty_todo_emoji11">🍪</string>
+    <string name="empty_todo_emoji12">📝</string>
+    <string name="empty_todo_emoji13">💬</string>
+    <string name="empty_todo_emoji14">📜</string>
+    <string name="empty_todo_emoji15">🧹</string>
+
+    <string name="input_title">✨ NEW ✨</string>
+    <string name="input_hint">Please enter a task.</string>
+    <string name="input_hint_toast">Please enter a task.</string>
+
+    <string name="delete_title">Delete</string>
+    <string name="delete_content">Are you sure you want to delete this task?</string>
+
+    <string name="update_title">Update Notice</string>
+    <string name="required_update_content">A required update is needed!</string>
+    <string name="recommended_update_content">Would you like to update to the latest version?</string>
+</resources>

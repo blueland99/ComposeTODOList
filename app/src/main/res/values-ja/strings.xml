@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">ブルートゥドゥ</string>
+
+    <string name="next">次へ</string>
+    <string name="cancel">キャンセル</string>
+    <string name="confirm">確認</string>
+
+    <string name="empty_todo_value">タスクがありません。\n次の目標は「%s」にしてみませんか？ %s</string>
+    <string name="empty_todo_value1">コーヒーを一杯飲む</string>
+    <string name="empty_todo_value2">ぼーっとする</string>
+    <string name="empty_todo_value3">ストレッチする</string>
+    <string name="empty_todo_value4">おいしいおやつを探す</string>
+    <string name="empty_todo_value5">空を見上げる</string>
+    <string name="empty_todo_value6">寝る前に5分間読書する</string>
+    <string name="empty_todo_value7">散歩に出かける</string>
+    <string name="empty_todo_value8">好きな曲を聴く</string>
+    <string name="empty_todo_value9">クローゼットを整理する</string>
+    <string name="empty_todo_value10">面白い動画を見る</string>
+    <string name="empty_todo_value11">甘いおやつを作る</string>
+    <string name="empty_todo_value12">明日の計画を立てる</string>
+    <string name="empty_todo_value13">友達にメッセージを送る</string>
+    <string name="empty_todo_value14">いい言葉を探す</string>
+    <string name="empty_todo_value15">軽い家事をする</string>
+
+    <string name="empty_todo_emoji1">☕️</string>
+    <string name="empty_todo_emoji2">😌</string>
+    <string name="empty_todo_emoji3">🧘‍♂️</string>
+    <string name="empty_todo_emoji4">🍫</string>
+    <string name="empty_todo_emoji5">☁️</string>
+    <string name="empty_todo_emoji6">📖</string>
+    <string name="empty_todo_emoji7">🚶‍</string>
+    <string name="empty_todo_emoji8">🎧</string>
+    <string name="empty_todo_emoji9">（時々だけ…）</string>
+    <string name="empty_todo_emoji10">📺</string>
+    <string name="empty_todo_emoji11">🍪</string>
+    <string name="empty_todo_emoji12">📝</string>
+    <string name="empty_todo_emoji13">💬</string>
+    <string name="empty_todo_emoji14">📜</string>
+    <string name="empty_todo_emoji15">🧹</string>
+
+    <string name="input_title">✨ NEW ✨</string>
+    <string name="input_hint">タスクを入力してください。</string>
+    <string name="input_hint_toast">タスクを入力してください。</string>
+
+    <string name="delete_title">削除</string>
+    <string name="delete_content">このタスクを削除しますか？</string>
+
+    <string name="update_title">更新のお知らせ</string>
+    <string name="required_update_content">必須のアップデートがあります！</string>
+    <string name="recommended_update_content">最新バージョンにアップデートしますか？</string>
+</resources>
