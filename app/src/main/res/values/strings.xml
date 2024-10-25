@@ -38,7 +38,10 @@
     <string name="empty_todo_emoji14">📜</string>
     <string name="empty_todo_emoji15">🧹</string>
 
-    <string name="input_title">새로운 할 일</string>
+    <string name="input_title">✨ NEW ✨</string>
     <string name="input_hint">할 일을 입력해주세요.</string>
     <string name="input_hint_toast">할 일을 입력해주세요.</string>
+
+    <string name="delete_title">삭제하기</string>
+    <string name="delete_content">할 일을 삭제하시겠습니까?</string>
 </resources>

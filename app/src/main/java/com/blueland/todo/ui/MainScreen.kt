@@ -37,9 +37,11 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.blueland.todo.R
 import com.blueland.todo.data.local.TodoEntity
+import com.blueland.todo.enums.DialogType
 import com.blueland.todo.ui.theme.LocalColors
 import com.blueland.todo.ui.theme.LocalTextStyles
 import com.blueland.todo.ui.theme.ui.theme.LocalShapes
+import com.blueland.todo.viewmodel.DialogViewModel
 import com.blueland.todo.viewmodel.InputDialogViewModel
 import com.blueland.todo.viewmodel.MainViewModel
 import kotlin.system.exitProcess
@@ -47,7 +49,7 @@ import kotlin.system.exitProcess
 @Composable
 fun MainScreen(
     viewModel: MainViewModel = hiltViewModel(),
-    inputDialogViewModel: InputDialogViewModel = hiltViewModel()
+    inputDialogViewModel: InputDialogViewModel = hiltViewModel(),
 ) {
     val TAG = LocalContext.current.javaClass.simpleName
 
@@ -176,15 +178,21 @@ fun MainScreen(
     )
 
     InputDialog()
+    CustomDialog()
 }
 
 
 @Composable
 fun TodoItem(
     viewModel: MainViewModel = hiltViewModel(),
+    dialogViewModel: DialogViewModel = hiltViewModel(),
     item: TodoEntity,
     color: Color
 ) {
+    val TAG = LocalContext.current.javaClass.simpleName
+
+    val context = LocalContext.current
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -233,7 +241,18 @@ fun TodoItem(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
                         onClick = {
-                            viewModel.deleteTodo(item)
+                            dialogViewModel.showDialog(
+                                dialogType = DialogType.CONFIRM,
+                                title = context.getString(R.string.delete_title),
+                                content = context.getString(R.string.delete_content),
+                                onConfirm = {
+                                    Log.d(TAG, "MainScreen: click ConfirmDialog onConfirm")
+                                    viewModel.deleteTodo(item)
+                                },
+                                onDismiss = {
+                                    Log.d(TAG, "MainScreen: click ConfirmDialog onDismiss")
+                                }
+                            )
                         }
                     ),
                 colorFilter = ColorFilter.tint(LocalColors.current.text1),
