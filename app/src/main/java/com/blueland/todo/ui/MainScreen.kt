@@ -1,6 +1,8 @@
 package com.blueland.todo.ui
 
 import android.util.Log
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -40,6 +42,7 @@ import com.blueland.todo.ui.theme.LocalTextStyles
 import com.blueland.todo.ui.theme.ui.theme.LocalShapes
 import com.blueland.todo.viewmodel.InputDialogViewModel
 import com.blueland.todo.viewmodel.MainViewModel
+import kotlin.system.exitProcess
 
 @Composable
 fun MainScreen(
@@ -47,6 +50,14 @@ fun MainScreen(
     inputDialogViewModel: InputDialogViewModel = hiltViewModel()
 ) {
     val TAG = LocalContext.current.javaClass.simpleName
+
+    val context = LocalContext.current
+
+    // 뒤로가기 버튼
+    BackHandler {
+        (context as? ComponentActivity)?.finishAffinity()
+        exitProcess(0) // 프로세스 종료
+    }
 
     val items by viewModel.allTodos.collectAsState(initial = emptyList())
 
