@@ -30,6 +30,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -65,6 +66,7 @@ fun MainScreen(
     val TAG = LocalContext.current.javaClass.simpleName
 
     val context = LocalContext.current
+    val coroutineScope = rememberCoroutineScope()
 
     var updateStatus by remember { mutableStateOf(UpdateStatus.NONE) }
 
@@ -198,7 +200,10 @@ fun MainScreen(
                 modifier = Modifier.padding(paddingValues),
                 contentPadding = PaddingValues(top = 32.dp, bottom = 90.dp, start = 16.dp, end = 16.dp)
             ) {
-                itemsIndexed(items) { index, item ->
+                itemsIndexed(
+                    items,
+                    key = { _, item -> item.id } // 컴포저블 재구성(recomposition)과 상태 유지의 불일치로 인해 추가
+                ) { index, item ->
                     val color = colors[index % colors.size]  // 색상을 순환하도록 설정
                     TodoItem(
                         item = item, color = color,
@@ -220,6 +225,14 @@ fun MainScreen(
                                 onDismiss = {
                                     Log.d(TAG, "click InputDialog onDismiss")
                                 }
+                            )
+                        },
+                        onComplete = {
+                            viewModel.updateTodo(
+                                item.copy(
+                                    isCompleted = !item.isCompleted,
+                                    completedAt = System.currentTimeMillis()
+                                )
                             )
                         }
                     )
@@ -268,7 +281,8 @@ fun TodoItem(
     dialogViewModel: DialogViewModel = hiltViewModel(),
     item: TodoEntity,
     color: Color,
-    onClick: () -> Unit
+    onClick: (id: Int) -> Unit,
+    onComplete: () -> Unit
 ) {
     val TAG = LocalContext.current.javaClass.simpleName
 
@@ -281,7 +295,7 @@ fun TodoItem(
             .pointerInput(Unit) {
                 detectTapGestures(
                     onTap = {
-                        onClick()
+                        onClick(item.id)
                     }
                 )
             },
@@ -304,12 +318,7 @@ fun TodoItem(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
                         onClick = {
-                            viewModel.updateTodo(
-                                item.copy(
-                                    isCompleted = !item.isCompleted,
-                                    completedAt = System.currentTimeMillis()
-                                )
-                            )
+                            onComplete()
                         }
                     ),
                 colorFilter = ColorFilter.tint(if (item.isCompleted) color else LocalColors.current.disable1),
@@ -324,7 +333,7 @@ fun TodoItem(
             ) {
                 // 할 일
                 Text(
-                    item.title,
+                    "${item.id} : ${item.title}",
                     modifier = Modifier.fillMaxWidth(),
                     style = LocalTextStyles.current.mediumBodySm
                 )
