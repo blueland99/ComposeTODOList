@@ -33,7 +33,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.input.pointer.pointerInput
@@ -203,7 +202,7 @@ fun MainScreen(
                     val color = colors[index % colors.size]  // 색상을 순환하도록 설정
                     TodoItem(
                         item = item, color = color,
-                        onLongPress = {
+                        onClick = {
                             // 할 일 수정 팝업 띄움
                             inputDialogViewModel.showDialog(
                                 title = context.getString(R.string.input_modify_todo_title),
@@ -269,7 +268,7 @@ fun TodoItem(
     dialogViewModel: DialogViewModel = hiltViewModel(),
     item: TodoEntity,
     color: Color,
-    onLongPress: (Offset) -> Unit
+    onClick: () -> Unit
 ) {
     val TAG = LocalContext.current.javaClass.simpleName
 
@@ -281,7 +280,9 @@ fun TodoItem(
             .padding(vertical = 6.dp)
             .pointerInput(Unit) {
                 detectTapGestures(
-                    onLongPress = onLongPress
+                    onTap = {
+                        onClick()
+                    }
                 )
             },
         shape = LocalShapes.large,
