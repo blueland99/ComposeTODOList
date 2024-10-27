@@ -38,7 +38,7 @@
     <string name="empty_todo_emoji14">📜</string>
     <string name="empty_todo_emoji15">🧹</string>
 
-    <string name="input_title">✨ NEW ✨</string>
+    <string name="input_new_todo_title">✨ NEW ✨</string>
     <string name="input_hint">할 일을 입력해주세요.</string>
     <string name="input_hint_toast">할 일을 입력해주세요.</string>
 

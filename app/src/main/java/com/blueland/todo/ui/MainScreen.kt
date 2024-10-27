@@ -208,6 +208,8 @@ fun MainScreen(
                 onClick = {
                     // 할 일 입력 팝업 띄움
                     inputDialogViewModel.showDialog(
+                        title = context.getString(R.string.input_new_todo_title),
+                        hint = context.getString(R.string.input_hint),
                         onConfirm = {
                             Log.d(TAG, "click InputDialog onConfirm. value=$it")
                             viewModel.addTodo(it)

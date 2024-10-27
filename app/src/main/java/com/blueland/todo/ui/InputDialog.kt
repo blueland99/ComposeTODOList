@@ -42,9 +42,12 @@ fun InputDialog(
 ) {
     val context = LocalContext.current
     val isDialogVisible by viewModel.isDialogVisible
+    val title by viewModel.dialogTitle
+    val content by viewModel.dialogContent
+    val hint by viewModel.dialogHint
 
     // 암호 입력 TextField
-    var input by remember { mutableStateOf("") }
+    var input by remember { mutableStateOf(content ?: "") }
 
     if (isDialogVisible) {
         val shape = LocalShapes.medium
@@ -69,12 +72,14 @@ fun InputDialog(
                         modifier = Modifier.padding(vertical = 30.dp, horizontal = 20.dp)
                     ) {
                         // Title 영역
-                        Text(
-                            modifier = Modifier.fillMaxWidth(),
-                            text = stringResource(R.string.input_title),
-                            style = LocalTextStyles.current.boldBodySm,
-                            textAlign = TextAlign.Center
-                        )
+                        title?.let {
+                            Text(
+                                modifier = Modifier.fillMaxWidth(),
+                                text = it,
+                                style = LocalTextStyles.current.boldBodySm,
+                                textAlign = TextAlign.Center
+                            )
+                        }
 
                         // 암호 입력
                         BasicTextField(
@@ -95,7 +100,7 @@ fun InputDialog(
                                 ) {
                                     if (input.isEmpty()) {
                                         Text(
-                                            text = stringResource(R.string.input_hint),
+                                            text = hint ?: "",
                                             style = LocalTextStyles.current.mediumBodySm,
                                             color = LocalColors.current.disable1
                                         )

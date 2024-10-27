@@ -38,7 +38,7 @@
     <string name="empty_todo_emoji14">📜</string>
     <string name="empty_todo_emoji15">🧹</string>
 
-    <string name="input_title">✨ NEW ✨</string>
+    <string name="input_new_todo_title">✨ NEW ✨</string>
     <string name="input_hint">タスクを入力してください。</string>
     <string name="input_hint_toast">タスクを入力してください。</string>
 

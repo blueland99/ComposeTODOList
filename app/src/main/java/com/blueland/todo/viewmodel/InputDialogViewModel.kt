@@ -14,12 +14,27 @@ class InputDialogViewModel @Inject constructor() : ViewModel() {
     private var onConfirmAction: (password: String) -> Unit = {}
     private var onDismissAction: () -> Unit = {}
 
+    private val _dialogTitle = mutableStateOf<String?>(null)
+    val dialogTitle: State<String?> = _dialogTitle
+
+    private val _dialogContent = mutableStateOf<String?>(null)
+    val dialogContent: State<String?> = _dialogContent
+
+    private val _dialogHint = mutableStateOf<String?>(null)
+    val dialogHint: State<String?> = _dialogHint
+
     fun showDialog(
+        title: String? = null,
+        content: String? = null,
+        hint: String? = null,
         onConfirm: (String) -> Unit,
         onDismiss: () -> Unit = {}
     ) {
         onConfirmAction = onConfirm
         onDismissAction = onDismiss
+        _dialogTitle.value = title
+        _dialogContent.value = content
+        _dialogHint.value = hint
         _isDialogVisible.value = true
     }
 
