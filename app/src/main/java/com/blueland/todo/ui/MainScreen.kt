@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -30,8 +31,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -195,7 +198,24 @@ fun MainScreen(
             ) {
                 itemsIndexed(items) { index, item ->
                     val color = colors[index % colors.size]  // 색상을 순환하도록 설정
-                    TodoItem(item = item, color = color)
+                    TodoItem(
+                        item = item, color = color,
+                        onLongPress = {
+                            // 할 일 수정 팝업 띄움
+                            inputDialogViewModel.showDialog(
+                                title = context.getString(R.string.input_modify_todo_title),
+                                content = item.title,
+                                hint = context.getString(R.string.input_hint),
+                                onConfirm = {
+                                    Log.d(TAG, "click InputDialog onConfirm. value=$it")
+                                    viewModel.updateTodo(item.copy(title = it))
+                                },
+                                onDismiss = {
+                                    Log.d(TAG, "click InputDialog onDismiss")
+                                }
+                            )
+                        }
+                    )
                 }
             }
         },
@@ -240,7 +260,8 @@ fun TodoItem(
     viewModel: MainViewModel = hiltViewModel(),
     dialogViewModel: DialogViewModel = hiltViewModel(),
     item: TodoEntity,
-    color: Color
+    color: Color,
+    onLongPress: (Offset) -> Unit
 ) {
     val TAG = LocalContext.current.javaClass.simpleName
 
@@ -249,7 +270,12 @@ fun TodoItem(
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 6.dp),
+            .padding(vertical = 6.dp)
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onLongPress = onLongPress
+                )
+            },
         shape = LocalShapes.large,
         elevation = CardDefaults.elevatedCardElevation(2.dp),
 

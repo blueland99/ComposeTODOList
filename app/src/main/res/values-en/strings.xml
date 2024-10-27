@@ -39,6 +39,7 @@
     <string name="empty_todo_emoji15">🧹</string>
 
     <string name="input_new_todo_title">✨ NEW ✨</string>
+    <string name="input_modify_todo_title">Edit</string>
     <string name="input_hint">Please enter a task.</string>
     <string name="input_hint_toast">Please enter a task.</string>
 
