@@ -19,6 +19,6 @@ interface TodoDao {
     @Delete
     suspend fun deleteTodo(todo: TodoEntity)
 
-    @Query("SELECT * FROM todo_table ORDER BY createdAt DESC")
+    @Query("SELECT * FROM todo_table ORDER BY COALESCE(updatedAt, createdAt) DESC")
     fun getAllTodos(): Flow<List<TodoEntity>>
 }
