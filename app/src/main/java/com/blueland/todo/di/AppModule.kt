@@ -1,7 +1,6 @@
 package com.blueland.todo.di
 
 import android.content.Context
-import androidx.room.Room
 import com.blueland.todo.data.local.TodoDao
 import com.blueland.todo.data.local.TodoDatabase
 import com.blueland.todo.data.local.TodoRepository
@@ -19,11 +18,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): TodoDatabase {
-        return Room.databaseBuilder(
-            context,
-            TodoDatabase::class.java,
-            "todo_database"
-        ).build()
+        return TodoDatabase.getDatabase(context)
     }
 
     @Provides

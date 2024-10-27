@@ -7,7 +7,9 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -49,6 +51,7 @@ import com.blueland.todo.managers.AppUpdateManager
 import com.blueland.todo.ui.theme.LocalColors
 import com.blueland.todo.ui.theme.LocalTextStyles
 import com.blueland.todo.ui.theme.ui.theme.LocalShapes
+import com.blueland.todo.utils.formatDate
 import com.blueland.todo.viewmodel.DialogViewModel
 import com.blueland.todo.viewmodel.InputDialogViewModel
 import com.blueland.todo.viewmodel.MainViewModel
@@ -208,7 +211,12 @@ fun MainScreen(
                                 hint = context.getString(R.string.input_hint),
                                 onConfirm = {
                                     Log.d(TAG, "click InputDialog onConfirm. value=$it")
-                                    viewModel.updateTodo(item.copy(title = it))
+                                    viewModel.updateTodo(
+                                        item.copy(
+                                            title = it,
+                                            updatedAt = System.currentTimeMillis()
+                                        )
+                                    )
                                 },
                                 onDismiss = {
                                     Log.d(TAG, "click InputDialog onDismiss")
@@ -295,20 +303,38 @@ fun TodoItem(
                         interactionSource = remember { MutableInteractionSource() },
                         indication = null,
                         onClick = {
-                            viewModel.updateTodo(item.copy(isCompleted = !item.isCompleted))
+                            viewModel.updateTodo(
+                                item.copy(
+                                    isCompleted = !item.isCompleted,
+                                    completedAt = System.currentTimeMillis()
+                                )
+                            )
                         }
                     ),
                 colorFilter = ColorFilter.tint(if (item.isCompleted) color else LocalColors.current.disable1),
                 contentDescription = null
             )
 
-            Text(
-                item.title,
+            Column(
                 modifier = Modifier
                     .padding(start = 12.dp)
                     .weight(1f),
-                style = LocalTextStyles.current.mediumBodySm
-            )
+                verticalArrangement = Arrangement.spacedBy(4.dp)
+            ) {
+                // 할 일
+                Text(
+                    item.title,
+                    modifier = Modifier.fillMaxWidth(),
+                    style = LocalTextStyles.current.mediumBodySm
+                )
+                // 마지막 수정 일시 (수정 일시가 없으면 생성 일시 표시)
+                Text(
+                    formatDate(item.updatedAt ?: item.createdAt),
+                    modifier = Modifier.fillMaxWidth(),
+                    style = LocalTextStyles.current.mediumCaptionMd,
+                    color = LocalColors.current.text3
+                )
+            }
 
             // 삭제 버튼
             Image(
