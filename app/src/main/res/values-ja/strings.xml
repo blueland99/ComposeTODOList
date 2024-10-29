@@ -4,7 +4,7 @@
     <string name="next">次へ</string>
     <string name="cancel">キャンセル</string>
     <string name="confirm">確認</string>
-    
+
     <string name="incomplete_value">未完了 %d</string>
     <string name="complete_value">完了 %d</string>
 
@@ -52,4 +52,12 @@
     <string name="update_title">更新のお知らせ</string>
     <string name="required_update_content">必須のアップデートがあります！</string>
     <string name="recommended_update_content">最新バージョンにアップデートしますか？</string>
+
+    <string name="create_title">タスク登録</string>
+    <string name="create_message">目標に向かって一歩進みましょう！新しいタスクを登録してください！🎯</string>
+    <string name="create_message_none">今日は登録されたタスクがありません。良い一日を過ごすために、タスクを追加してください！👍</string>
+    <string name="incomplete_title">未完了のタスク</string>
+    <string name="incomplete_message_value">%dの残りのタスクをチェックして、大きな目標に向かいましょう！✅</string>
+    <string name="complete_title">タスク完了</string>
+    <string name="complete_message">すべてのタスクを完了しました！素晴らしい一日を続けてください！🌟</string>
 </resources>

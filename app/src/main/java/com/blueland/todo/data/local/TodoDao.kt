@@ -7,6 +7,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
+import java.time.LocalDate
 
 @Dao
 interface TodoDao {
@@ -29,4 +30,12 @@ interface TodoDao {
     // 미완료된 할 일의 개수 조회
     @Query("SELECT COUNT(*) FROM todo_table WHERE isCompleted = 0")
     fun getIncompleteTodoCount(): Flow<Int>
+
+    // 오늘 미완료된 할 일의 개수 조회
+    @Query("SELECT COUNT(*) FROM todo_table WHERE isCompleted = 0 AND date(datetime(createdAt, 'unixepoch')) = date('now')")
+    fun getTodayIncompleteTodos(): Flow<Int>
+
+    // 오늘 등록된 할 일의 개수 조회
+    @Query("SELECT COUNT(*) FROM todo_table WHERE date(datetime(createdAt, 'unixepoch')) = date('now')")
+    fun getTodayRegisteredTodoCount(): Flow<Int>
 }

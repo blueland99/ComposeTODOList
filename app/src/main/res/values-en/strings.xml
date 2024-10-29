@@ -52,4 +52,12 @@
     <string name="update_title">Update Notice</string>
     <string name="required_update_content">A required update is needed!</string>
     <string name="recommended_update_content">Would you like to update to the latest version?</string>
+
+    <string name="create_title">Task Registration</string>
+    <string name="create_message">Take a step towards your goals! Register a new task! 🎯</string>
+    <string name="create_message_none">No tasks have been registered today. Add a task to make your day better! 👍</string>
+    <string name="incomplete_title">Incomplete Tasks</string>
+    <string name="incomplete_message_value">Small achievements lead to big goals! How about checking %d remaining tasks? ✅</string>
+    <string name="complete_title">Task Completed</string>
+    <string name="complete_message">All tasks have been completed! Keep up the great work today! 🌟</string>
 </resources>

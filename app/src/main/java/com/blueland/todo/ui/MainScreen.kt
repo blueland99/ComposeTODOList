@@ -54,6 +54,7 @@ import com.blueland.todo.managers.AppUpdateManager
 import com.blueland.todo.ui.theme.LocalColors
 import com.blueland.todo.ui.theme.LocalTextStyles
 import com.blueland.todo.ui.theme.ui.theme.LocalShapes
+import com.blueland.todo.utils.NotificationPermissionRequest
 import com.blueland.todo.utils.formatDate
 import com.blueland.todo.viewmodel.DialogViewModel
 import com.blueland.todo.viewmodel.InputDialogViewModel
@@ -68,6 +69,8 @@ fun MainScreen(
     inputDialogViewModel: InputDialogViewModel = hiltViewModel(),
 ) {
     val TAG = LocalContext.current.javaClass.simpleName
+
+    NotificationPermissionRequest() // 알림 권한 요청
 
     val context = LocalContext.current
     val coroutineScope = rememberCoroutineScope()
