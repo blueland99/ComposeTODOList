@@ -4,6 +4,9 @@
     <string name="next">次へ</string>
     <string name="cancel">キャンセル</string>
     <string name="confirm">確認</string>
+    
+    <string name="incomplete_value">未完了 %d</string>
+    <string name="complete_value">完了 %d</string>
 
     <string name="empty_todo_value">タスクがありません。\n次の目標は「%s」にしてみませんか？ %s</string>
     <string name="empty_todo_value1">コーヒーを一杯飲む</string>

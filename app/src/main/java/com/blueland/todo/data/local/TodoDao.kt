@@ -21,4 +21,12 @@ interface TodoDao {
 
     @Query("SELECT * FROM todo_table ORDER BY COALESCE(updatedAt, createdAt) DESC")
     fun getAllTodos(): Flow<List<TodoEntity>>
+
+    // 완료된 할 일의 개수 조회
+    @Query("SELECT COUNT(*) FROM todo_table WHERE isCompleted = 1")
+    fun getCompletedTodoCount(): Flow<Int>
+
+    // 미완료된 할 일의 개수 조회
+    @Query("SELECT COUNT(*) FROM todo_table WHERE isCompleted = 0")
+    fun getIncompleteTodoCount(): Flow<Int>
 }

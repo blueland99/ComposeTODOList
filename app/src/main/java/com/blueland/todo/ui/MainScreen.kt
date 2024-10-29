@@ -21,9 +21,12 @@ import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -57,6 +60,7 @@ import com.blueland.todo.viewmodel.InputDialogViewModel
 import com.blueland.todo.viewmodel.MainViewModel
 import kotlin.system.exitProcess
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
     viewModel: MainViewModel = hiltViewModel(),
@@ -119,7 +123,9 @@ fun MainScreen(
         exitProcess(0) // 프로세스 종료
     }
 
-    val items by viewModel.allTodos.collectAsState(initial = emptyList())
+    val items by viewModel.items.collectAsState(initial = emptyList())
+    val completeCount by viewModel.completeCount.collectAsState(0)
+    val incompleteCount by viewModel.incompleteCount.collectAsState(0)
 
     val emptyTextList = listOf(
         stringResource(R.string.empty_todo_value1),
@@ -161,6 +167,33 @@ fun MainScreen(
 
     Scaffold(
         containerColor = LocalColors.current.background,
+        topBar = {
+            TopAppBar(
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = LocalColors.current.background,
+                ),
+                title = {},
+                actions = {
+                    Row(
+                        modifier = Modifier.padding(horizontal = 20.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Text(
+                            modifier = Modifier.weight(1f),
+                            text = stringResource(R.string.complete_value, completeCount),
+                            style = LocalTextStyles.current.boldBodyMd,
+                            textAlign = TextAlign.Start
+                        )
+                        Text(
+                            modifier = Modifier.weight(1f),
+                            text = stringResource(R.string.incomplete_value, incompleteCount),
+                            style = LocalTextStyles.current.boldBodyMd,
+                            textAlign = TextAlign.End
+                        )
+                    }
+                }
+            )
+        },
         content = { paddingValues ->
 
             // 순환할 색상 리스트
@@ -198,7 +231,7 @@ fun MainScreen(
 
             LazyColumn(
                 modifier = Modifier.padding(paddingValues),
-                contentPadding = PaddingValues(top = 32.dp, bottom = 90.dp, start = 16.dp, end = 16.dp)
+                contentPadding = PaddingValues(top = 16.dp, bottom = 90.dp, start = 16.dp, end = 16.dp)
             ) {
                 itemsIndexed(
                     items,
@@ -333,7 +366,7 @@ fun TodoItem(
             ) {
                 // 할 일
                 Text(
-                    "${item.id} : ${item.title}",
+                    item.title,
                     modifier = Modifier.fillMaxWidth(),
                     style = LocalTextStyles.current.mediumBodySm
                 )

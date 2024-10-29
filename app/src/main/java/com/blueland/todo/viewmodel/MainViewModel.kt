@@ -12,7 +12,9 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val repository: TodoRepository
 ) : ViewModel() {
-    val allTodos = repository.allTodos
+    val items = repository.getAllTodos()
+    val completeCount = repository.getCompletedTodoCount()
+    val incompleteCount = repository.getIncompleteTodoCount()
 
     // 항목 추가
     fun addTodo(title: String) {

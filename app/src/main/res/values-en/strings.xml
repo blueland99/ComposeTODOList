@@ -38,6 +38,9 @@
     <string name="empty_todo_emoji14">📜</string>
     <string name="empty_todo_emoji15">🧹</string>
 
+    <string name="incomplete_value">Incomplete %d</string>
+    <string name="complete_value">Complete %d</string>
+
     <string name="input_new_todo_title">✨ NEW ✨</string>
     <string name="input_modify_todo_title">Edit</string>
     <string name="input_hint">Please enter a task.</string>

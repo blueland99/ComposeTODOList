@@ -5,6 +5,9 @@
     <string name="cancel">취소</string>
     <string name="confirm">확인</string>
 
+    <string name="incomplete_value">미완료 %d</string>
+    <string name="complete_value">완료 %d</string>
+
     <string name="empty_todo_value">할 일이 없네요.\n혹시 다음 목표는 ‘%s’인가요? %s</string>
     <string name="empty_todo_value1">커피 한 잔 마시기</string>
     <string name="empty_todo_value2">멍 때리기</string>

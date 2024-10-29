@@ -3,7 +3,19 @@ package com.blueland.todo.data.local
 import kotlinx.coroutines.flow.Flow
 
 class TodoRepository(private val todoDao: TodoDao) {
-    val allTodos: Flow<List<TodoEntity>> = todoDao.getAllTodos()
+    fun getAllTodos(): Flow<List<TodoEntity>> {
+        return todoDao.getAllTodos()
+    }
+
+    // 완료된 할 일 개수
+    fun getCompletedTodoCount(): Flow<Int> {
+        return todoDao.getCompletedTodoCount()
+    }
+
+    // 미완료된 할 일 개수
+    fun getIncompleteTodoCount(): Flow<Int> {
+        return todoDao.getIncompleteTodoCount()
+    }
 
     suspend fun insert(todo: TodoEntity) {
         todoDao.insertTodo(todo)
