@@ -33,7 +33,7 @@ val LightColors = Colors(
 )
 
 val DarkColors = Colors(
-    background = Color(0xFF1E1E1E),
+    background = Color(0xFF2A2A2A),
     main = Color(0xFF3B4B71),
     point1 = Color(0xFFD596D2),
     point2 = Color(0xFFCC9A7E),
