@@ -13,6 +13,7 @@ data class Colors(
     val text2: Color,
     val text3: Color,
     val button1: Color,
+    val icon1: Color,
     val disable1: Color,
     val line: Color,
 )
@@ -28,6 +29,7 @@ val LightColors = Colors(
     text2 = Color(0xFF5D5D5D),
     text3 = Color(0xFF737373),
     button1 = Color(0xFFF9F9F9),
+    icon1 = Color(0xFF808080),
     disable1 = Color(0xFFCFCFCF),
     line = Color(0x80CFCFCF)
 )
@@ -43,6 +45,7 @@ val DarkColors = Colors(
     text2 = Color(0xFFCCCCCC),
     text3 = Color(0xFFB3B3B3),
     button1 = Color(0xFFF9F9F9),
+    icon1 = Color(0xFFABABAB),
     disable1 = Color(0xFF4D4D4D),
     line = Color(0x804D4D4D)
 )

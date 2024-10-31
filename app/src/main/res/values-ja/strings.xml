@@ -60,4 +60,7 @@
     <string name="incomplete_message_value">%dの残りのタスクをチェックして、大きな目標に向かいましょう！✅</string>
     <string name="complete_title">タスク完了</string>
     <string name="complete_message">すべてのタスクを完了しました！素晴らしい一日を続けてください！🌟</string>
+
+    <string name="setting">設定</string>
+    <string name="notification">通知を受け取る</string>
 </resources>

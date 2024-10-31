@@ -60,4 +60,7 @@
     <string name="incomplete_message_value">Small achievements lead to big goals! How about checking %d remaining tasks? ✅</string>
     <string name="complete_title">Task Completed</string>
     <string name="complete_message">All tasks have been completed! Keep up the great work today! 🌟</string>
+
+    <string name="setting">Settings</string>
+    <string name="notification">Enable Notifications</string>
 </resources>

@@ -19,10 +19,15 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -46,11 +51,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
 import com.blueland.todo.R
 import com.blueland.todo.data.local.TodoEntity
 import com.blueland.todo.enums.DialogType
 import com.blueland.todo.enums.UpdateStatus
 import com.blueland.todo.managers.AppUpdateManager
+import com.blueland.todo.navigation.Route
 import com.blueland.todo.ui.theme.LocalColors
 import com.blueland.todo.ui.theme.LocalTextStyles
 import com.blueland.todo.ui.theme.ui.theme.LocalShapes
@@ -64,6 +71,7 @@ import kotlin.system.exitProcess
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen(
+    navController: NavHostController,
     viewModel: MainViewModel = hiltViewModel(),
     dialogViewModel: DialogViewModel = hiltViewModel(),
     inputDialogViewModel: InputDialogViewModel = hiltViewModel(),
@@ -175,23 +183,37 @@ fun MainScreen(
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = LocalColors.current.background,
                 ),
-                title = {},
-                actions = {
+                title = {
                     Row(
-                        modifier = Modifier.padding(horizontal = 20.dp),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.spacedBy(12.dp)
                     ) {
                         Text(
-                            modifier = Modifier.weight(1f),
                             text = stringResource(R.string.complete_value, completeCount),
-                            style = LocalTextStyles.current.boldBodyMd,
-                            textAlign = TextAlign.Start
+                            style = LocalTextStyles.current.boldBodyMd
                         )
+
+                        // 미완료
                         Text(
-                            modifier = Modifier.weight(1f),
                             text = stringResource(R.string.incomplete_value, incompleteCount),
-                            style = LocalTextStyles.current.boldBodyMd,
-                            textAlign = TextAlign.End
+                            style = LocalTextStyles.current.boldBodyMd
+                        )
+                    }
+                },
+                actions = {
+                    // 설정 버튼
+                    IconButton(
+                        colors = IconButtonDefaults.iconButtonColors(
+                            contentColor = LocalColors.current.icon1,
+                        ),
+                        onClick = {
+                            // 설정 화면으로 이동
+                            navController.navigate(Route.Setting.route)
+                        }
+                    ) {
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            imageVector = Icons.Default.Settings,
+                            contentDescription = null
                         )
                     }
                 }

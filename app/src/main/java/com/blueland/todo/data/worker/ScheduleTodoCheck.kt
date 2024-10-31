@@ -28,7 +28,6 @@ fun scheduleIncompleteTodo(context: Context) {
     )
 }
 
-
 /**
  * 주어진 목표 시간에 따라 Worker를 생성 및 예약
  *
@@ -58,6 +57,25 @@ private inline fun <reified T : CoroutineWorker> createAndEnqueueWorker(
         ExistingPeriodicWorkPolicy.KEEP,
         workRequest
     )
+}
+
+/**
+ * 특정 Worker를 취소하는 함수
+ *
+ * @param context 애플리케이션의 Context
+ * @param uniqueWorkName 취소할 작업의 고유 이름
+ */
+fun cancelWorker(context: Context, uniqueWorkName: String) {
+    WorkManager.getInstance(context).cancelUniqueWork(uniqueWorkName)
+}
+
+/**
+ * 모든 Worker 작업을 취소하는 함수
+ *
+ * @param context 애플리케이션의 Context
+ */
+fun cancelAllWorkers(context: Context) {
+    WorkManager.getInstance(context).cancelAllWork()
 }
 
 /**

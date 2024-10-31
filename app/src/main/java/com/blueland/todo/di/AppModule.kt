@@ -1,6 +1,8 @@
 package com.blueland.todo.di
 
 import android.content.Context
+import android.content.SharedPreferences
+import com.blueland.todo.data.local.LocalDataSource
 import com.blueland.todo.data.local.TodoDao
 import com.blueland.todo.data.local.TodoDatabase
 import com.blueland.todo.data.local.TodoRepository
@@ -30,5 +32,19 @@ object AppModule {
     @Singleton
     fun provideTodoRepository(todoDao: TodoDao): TodoRepository {
         return TodoRepository(todoDao)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSharedPreferences(
+        @ApplicationContext context: Context
+    ): SharedPreferences {
+        return context.getSharedPreferences("blueland_todo", Context.MODE_PRIVATE)
+    }
+
+    @Provides
+    @Singleton
+    fun provideLocalDataSource(sharedPreferences: SharedPreferences): LocalDataSource {
+        return LocalDataSource(sharedPreferences)
     }
 }

@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.Composable
-import com.blueland.todo.ui.MainScreen
+import androidx.navigation.compose.rememberNavController
+import com.blueland.todo.navigation.AppNavGraph
 import com.blueland.todo.ui.theme.MyAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,7 +15,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MyApp {
-                MainScreen()
+                val navController = rememberNavController()
+                AppNavGraph(navController = navController)
             }
         }
     }

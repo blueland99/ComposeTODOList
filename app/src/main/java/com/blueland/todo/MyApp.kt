@@ -3,6 +3,7 @@ package com.blueland.todo
 import android.app.Application
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
+import com.blueland.todo.data.local.LocalDataSource
 import com.blueland.todo.data.worker.scheduleIncompleteTodo
 import com.blueland.todo.utils.NotificationUtil
 import com.google.firebase.FirebaseApp
@@ -15,6 +16,9 @@ class MyApp : Application(), Configuration.Provider {
     @Inject
     lateinit var workerFactory: HiltWorkerFactory
 
+    @Inject
+    lateinit var localDataSource: LocalDataSource
+
     override val workManagerConfiguration: Configuration
         get() = Configuration.Builder()
             .setWorkerFactory(workerFactory)
@@ -25,8 +29,11 @@ class MyApp : Application(), Configuration.Provider {
         // Firebase 초기화
         FirebaseApp.initializeApp(this)
 
-        // Worker
         NotificationUtil.createNotificationChannel(this)
-        scheduleIncompleteTodo(this)
+
+        if (localDataSource.getNotification()) {
+            // Worker
+            scheduleIncompleteTodo(this)
+        }
     }
 }

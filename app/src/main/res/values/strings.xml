@@ -60,4 +60,7 @@
     <string name="incomplete_message_value">작은 성취가 모여 큰 목표가 돼요! %d개의 남은 할 일을 체크해 볼까요? ✅</string>
     <string name="complete_title">할 일 완료</string>
     <string name="complete_message">모든 할 일을 완료했습니다! 멋진 하루를 계속 이어가세요! 🌟</string>
+
+    <string name="setting">설정</string>
+    <string name="notification">알림받기</string>
 </resources>
