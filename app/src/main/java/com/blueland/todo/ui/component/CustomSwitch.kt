@@ -25,7 +25,7 @@ fun CustomSwitch(
     disableColor: Color = LocalColors.current.disable1,
     checked: Boolean,
     enabled: Boolean = true,
-    width: Dp = 50.dp,
+    width: Dp = 44.dp,
     height: Dp = 23.dp,
     onChange: (checked: Boolean) -> Unit
 ) {
