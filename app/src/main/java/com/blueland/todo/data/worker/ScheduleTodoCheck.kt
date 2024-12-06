@@ -19,7 +19,9 @@ fun scheduleIncompleteTodo(context: Context) {
         LocalTime.of(16, 0), // 오후 4시
         TodoCheckWorker.WorkConstants.WORK_NAME_TODAY_CHECK_TODO
     )
+}
 
+fun scheduleCreateTodo(context: Context) {
     // 할 일 생성 알림 Worker 예약
     createAndEnqueueWorker<TodoCheckWorker>(
         context,
@@ -40,6 +42,7 @@ private inline fun <reified T : CoroutineWorker> createAndEnqueueWorker(
     targetTime: LocalTime,
     uniqueWorkName: String
 ) {
+    // 목표 시간까지 남은 시간
     val initialDelay = calculateInitialDelay(targetTime)
 
     // 작업에 전달할 데이터 생성
@@ -54,7 +57,7 @@ private inline fun <reified T : CoroutineWorker> createAndEnqueueWorker(
 
     WorkManager.getInstance(context).enqueueUniquePeriodicWork(
         uniqueWorkName,
-        ExistingPeriodicWorkPolicy.KEEP,
+        ExistingPeriodicWorkPolicy.UPDATE, // 기존 작업을 대체
         workRequest
     )
 }

@@ -62,5 +62,9 @@
     <string name="complete_message">모든 할 일을 완료했습니다! 멋진 하루를 계속 이어가세요! 🌟</string>
 
     <string name="setting">설정</string>
-    <string name="notification">알림받기</string>
+    <string name="notification">알림</string>
+    <string name="create_notification">등록 알림</string>
+    <string name="create_notification_content">매일 오전 8시, 할 일 등록 알림</string>
+    <string name="check_notification">확인 알림</string>
+    <string name="check_notification_content">매일 오후 4시, 남은 할 일과 완료 상태 알림</string>
 </resources>

@@ -37,7 +37,8 @@ object NotificationUtil {
             if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
                 return
             }
-            notify(1, builder.build())
+            val notificationId = (System.currentTimeMillis() % Int.MAX_VALUE).toInt()
+            notify(notificationId, builder.build())
         }
     }
 }

@@ -62,5 +62,9 @@
     <string name="complete_message">すべてのタスクを完了しました！素晴らしい一日を続けてください！🌟</string>
 
     <string name="setting">設定</string>
-    <string name="notification">通知を受け取る</string>
+    <string name="notification">通知</string>
+    <string name="create_notification">登録通知</string>
+    <string name="create_notification_content">毎日午前8時、タスク登録の通知</string>
+    <string name="check_notification">確認通知</string>
+    <string name="check_notification_content">毎日午後4時、残りのタスクと完了状況の通知</string>
 </resources>

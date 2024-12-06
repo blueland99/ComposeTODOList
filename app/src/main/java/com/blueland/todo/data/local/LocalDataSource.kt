@@ -16,6 +16,8 @@ class LocalDataSource @Inject constructor(
 ) {
     companion object {
         private const val NOTIFICATION = "notification"
+        private const val CREATE_NOTIFICATION = "createNotification"
+        private const val CHECK_NOTIFICATION = "checkNotification"
     }
 
     fun getNotification(): Boolean {
@@ -32,6 +34,42 @@ class LocalDataSource @Inject constructor(
     fun deleteNotification() {
         sharedPreferences.edit().apply {
             remove(NOTIFICATION)
+            apply()
+        }
+    }
+
+    fun getCreateNotification(): Boolean {
+        return sharedPreferences.getBoolean(CREATE_NOTIFICATION, true)
+    }
+
+    fun setCreateNotification(value: Boolean) {
+        sharedPreferences.edit().apply {
+            putBoolean(CREATE_NOTIFICATION, value)
+            apply()
+        }
+    }
+
+    fun deleteCreateNotification() {
+        sharedPreferences.edit().apply {
+            remove(CREATE_NOTIFICATION)
+            apply()
+        }
+    }
+
+    fun getCheckNotification(): Boolean {
+        return sharedPreferences.getBoolean(CHECK_NOTIFICATION, true)
+    }
+
+    fun setCheckNotification(value: Boolean) {
+        sharedPreferences.edit().apply {
+            putBoolean(CHECK_NOTIFICATION, value)
+            apply()
+        }
+    }
+
+    fun deleteCheckNotification() {
+        sharedPreferences.edit().apply {
+            remove(CHECK_NOTIFICATION)
             apply()
         }
     }

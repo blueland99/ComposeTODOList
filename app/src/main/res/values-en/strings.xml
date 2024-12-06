@@ -62,5 +62,9 @@
     <string name="complete_message">All tasks have been completed! Keep up the great work today! 🌟</string>
 
     <string name="setting">Settings</string>
-    <string name="notification">Enable Notifications</string>
+    <string name="notification">Notification</string>
+    <string name="create_notification">Create Notification</string>
+    <string name="create_notification_content">Daily at 8 AM, task registration notification</string>
+    <string name="check_notification">Check Notification</string>
+    <string name="check_notification_content">Daily at 4 PM, remaining tasks and completion status notification</string>
 </resources>
