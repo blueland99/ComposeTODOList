@@ -27,6 +27,7 @@ import com.blueland.todo.data.worker.cancelAllWorkers
 import com.blueland.todo.data.worker.cancelWorker
 import com.blueland.todo.data.worker.scheduleCreateTodo
 import com.blueland.todo.data.worker.scheduleIncompleteTodo
+import com.blueland.todo.ui.component.BaseTopBar
 import com.blueland.todo.ui.component.CustomSwitch
 import com.blueland.todo.ui.theme.LocalColors
 import com.blueland.todo.ui.theme.LocalTextStyles
@@ -47,17 +48,9 @@ fun SettingScreen(
     Scaffold(
         containerColor = LocalColors.current.background,
         topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = LocalColors.current.background,
-                ),
-                title = {
-                    Text(
-                        text = stringResource(R.string.setting),
-                        style = LocalTextStyles.current.boldBodyMd
-                    )
-                }
-            )
+            BaseTopBar(titleResId = R.string.setting) {
+                navController.popBackStack()
+            }
         },
         content = { paddingValues ->
             LazyColumn(
