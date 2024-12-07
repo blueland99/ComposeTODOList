@@ -10,14 +10,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
@@ -38,7 +35,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -48,7 +44,6 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -81,7 +76,6 @@ fun MainScreen(
     NotificationPermissionRequest() // 알림 권한 요청
 
     val context = LocalContext.current
-    val coroutineScope = rememberCoroutineScope()
 
     var updateStatus by remember { mutableStateOf(UpdateStatus.NONE) }
 
@@ -138,44 +132,6 @@ fun MainScreen(
     val completeCount by viewModel.completeCount.collectAsState(0)
     val incompleteCount by viewModel.incompleteCount.collectAsState(0)
 
-    val emptyTextList = listOf(
-        stringResource(R.string.empty_todo_value1),
-        stringResource(R.string.empty_todo_value2),
-        stringResource(R.string.empty_todo_value2),
-        stringResource(R.string.empty_todo_value3),
-        stringResource(R.string.empty_todo_value4),
-        stringResource(R.string.empty_todo_value5),
-        stringResource(R.string.empty_todo_value6),
-        stringResource(R.string.empty_todo_value7),
-        stringResource(R.string.empty_todo_value8),
-        stringResource(R.string.empty_todo_value9),
-        stringResource(R.string.empty_todo_value10),
-        stringResource(R.string.empty_todo_value11),
-        stringResource(R.string.empty_todo_value12),
-        stringResource(R.string.empty_todo_value13),
-        stringResource(R.string.empty_todo_value14),
-        stringResource(R.string.empty_todo_value15),
-    )
-
-    val emptyEmojiList = listOf(
-        stringResource(R.string.empty_todo_emoji1),
-        stringResource(R.string.empty_todo_emoji2),
-        stringResource(R.string.empty_todo_emoji2),
-        stringResource(R.string.empty_todo_emoji3),
-        stringResource(R.string.empty_todo_emoji4),
-        stringResource(R.string.empty_todo_emoji5),
-        stringResource(R.string.empty_todo_emoji6),
-        stringResource(R.string.empty_todo_emoji7),
-        stringResource(R.string.empty_todo_emoji8),
-        stringResource(R.string.empty_todo_emoji9),
-        stringResource(R.string.empty_todo_emoji10),
-        stringResource(R.string.empty_todo_emoji11),
-        stringResource(R.string.empty_todo_emoji12),
-        stringResource(R.string.empty_todo_emoji13),
-        stringResource(R.string.empty_todo_emoji14),
-        stringResource(R.string.empty_todo_emoji15),
-    )
-
     Scaffold(
         containerColor = LocalColors.current.background,
         topBar = {
@@ -220,80 +176,23 @@ fun MainScreen(
             )
         },
         content = { paddingValues ->
-
-            // 순환할 색상 리스트
-            val colors = listOf(
-                LocalColors.current.point1,
-                LocalColors.current.point2,
-                LocalColors.current.point3,
-                LocalColors.current.point4
-            )
-
-            if (items.isEmpty()) {
-                // 리스트에서 랜덤 인덱스를 가져옴
-                val randomIndex = remember { emptyTextList.indices.random() }
-
-                // 랜덤 텍스트와 이모지 선택
-                val emptyText = emptyTextList[randomIndex]
-                val emptyEmoji = emptyEmojiList[randomIndex]
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+            ) {
+                // 그룹
+                GroupView()
 
                 Box(
-                    modifier = Modifier
-                        .padding(paddingValues)
-                        .fillMaxSize()
-                        .padding(16.dp),
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        stringResource(R.string.empty_todo_value, emptyText, emptyEmoji),
-                        style = LocalTextStyles.current.mediumBodySm,
-                        color = LocalColors.current.text1,
-                        textAlign = TextAlign.Center
-                    )
-                }
-                return@Scaffold
-            }
-
-            LazyColumn(
-                modifier = Modifier.padding(paddingValues),
-                contentPadding = PaddingValues(top = 16.dp, bottom = 90.dp, start = 16.dp, end = 16.dp)
-            ) {
-                itemsIndexed(
-                    items,
-                    key = { _, item -> item.id } // 컴포저블 재구성(recomposition)과 상태 유지의 불일치로 인해 추가
-                ) { index, item ->
-                    val color = colors[index % colors.size]  // 색상을 순환하도록 설정
-                    TodoItem(
-                        item = item, color = color,
-                        onClick = {
-                            // 할 일 수정 팝업 띄움
-                            inputDialogViewModel.showDialog(
-                                title = context.getString(R.string.input_modify_todo_title),
-                                content = item.title,
-                                hint = context.getString(R.string.input_hint),
-                                onConfirm = {
-                                    Log.d(TAG, "click InputDialog onConfirm. value=$it")
-                                    viewModel.updateTodo(
-                                        item.copy(
-                                            title = it,
-                                            updatedAt = System.currentTimeMillis()
-                                        )
-                                    )
-                                },
-                                onDismiss = {
-                                    Log.d(TAG, "click InputDialog onDismiss")
-                                }
-                            )
-                        },
-                        onComplete = {
-                            viewModel.updateTodo(
-                                item.copy(
-                                    isCompleted = !item.isCompleted,
-                                    completedAt = System.currentTimeMillis()
-                                )
-                            )
-                        }
-                    )
+                    Modifier
+                        .fillMaxWidth()
+                        .weight(1f)
+                )
+                if (items.isEmpty()) {
+                    TodoEmptyView()
+                } else {
+                    TodoListView()
                 }
             }
         },

@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import java.time.LocalDate
 
 @Dao
 interface TodoDao {
@@ -20,8 +19,13 @@ interface TodoDao {
     @Delete
     suspend fun deleteTodo(todo: TodoEntity)
 
+    // 전체 할일 조회
     @Query("SELECT * FROM todo_table ORDER BY COALESCE(updatedAt, createdAt) DESC")
-    fun getAllTodos(): Flow<List<TodoEntity>>
+    suspend fun getAllTodos(): List<TodoEntity>
+
+    // 특정 그룹에 속하는 할일 목록 조회
+    @Query("SELECT * FROM todo_table WHERE groupId = :groupId ORDER BY COALESCE(updatedAt, createdAt) DESC")
+    suspend fun getTodosByGroup(groupId: Int): List<TodoEntity>
 
     // 완료된 할 일의 개수 조회
     @Query("SELECT COUNT(*) FROM todo_table WHERE isCompleted = 1")

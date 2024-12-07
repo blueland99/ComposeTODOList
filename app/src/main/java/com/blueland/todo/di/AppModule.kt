@@ -2,6 +2,7 @@ package com.blueland.todo.di
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.blueland.todo.data.local.GroupDao
 import com.blueland.todo.data.local.LocalDataSource
 import com.blueland.todo.data.local.TodoDao
 import com.blueland.todo.data.local.TodoDatabase
@@ -24,14 +25,19 @@ object AppModule {
     }
 
     @Provides
+    fun provideGroupDao(database: TodoDatabase): GroupDao {
+        return database.groupDao()
+    }
+
+    @Provides
     fun provideTodoDao(database: TodoDatabase): TodoDao {
         return database.todoDao()
     }
 
     @Provides
     @Singleton
-    fun provideTodoRepository(todoDao: TodoDao): TodoRepository {
-        return TodoRepository(todoDao)
+    fun provideTodoRepository(groupDao: GroupDao, todoDao: TodoDao): TodoRepository {
+        return TodoRepository(groupDao, todoDao)
     }
 
     @Singleton

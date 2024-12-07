@@ -67,4 +67,7 @@
     <string name="create_notification_content">Daily at 8 AM, task registration notification</string>
     <string name="check_notification">Check Notification</string>
     <string name="check_notification_content">Daily at 4 PM, remaining tasks and completion status notification</string>
+
+    <string name="all">All</string>
+    <string name="unknown">Unassigned</string>
 </resources>

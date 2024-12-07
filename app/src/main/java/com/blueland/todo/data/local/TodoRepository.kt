@@ -2,9 +2,20 @@ package com.blueland.todo.data.local
 
 import kotlinx.coroutines.flow.Flow
 
-class TodoRepository(private val todoDao: TodoDao) {
-    fun getAllTodos(): Flow<List<TodoEntity>> {
+class TodoRepository(
+    private val groupDao: GroupDao,
+    private val todoDao: TodoDao
+) {
+    suspend fun getAllGroups(): List<GroupEntity> {
+        return groupDao.getAllGroups()
+    }
+
+    suspend fun getAllTodos(): List<TodoEntity> {
         return todoDao.getAllTodos()
+    }
+
+    suspend fun getTodosByGroup(groupId: Int): List<TodoEntity> {
+        return todoDao.getTodosByGroup(groupId)
     }
 
     // 완료된 할 일 개수
