@@ -57,7 +57,7 @@ private inline fun <reified T : CoroutineWorker> createAndEnqueueWorker(
 
     WorkManager.getInstance(context).enqueueUniquePeriodicWork(
         uniqueWorkName,
-        ExistingPeriodicWorkPolicy.UPDATE, // 기존 작업을 대체
+        ExistingPeriodicWorkPolicy.CANCEL_AND_REENQUEUE, // 기존 작업 취소 후 재등록
         workRequest
     )
 }
