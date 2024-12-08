@@ -210,7 +210,7 @@ fun MainScreen(
                                 return@showDialog
                             }
                             viewModel.addTodo(it)
-                            dialogViewModel.hideDialog()
+                            inputDialogViewModel.hideDialog()
                         },
                         onDismiss = {
                             Log.d(TAG, "click InputDialog onDismiss")
