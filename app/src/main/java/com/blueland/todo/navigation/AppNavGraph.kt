@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.blueland.todo.navigation.Route
+import com.blueland.todo.ui.GroupSettingScreen
 import com.blueland.todo.ui.MainScreen
 import com.blueland.todo.ui.SettingScreen
 
@@ -17,6 +17,10 @@ fun AppNavGraph(navController: NavHostController) {
 
         composable(route = Route.Setting.route) {
             SettingScreen(navController = navController)
+        }
+
+        composable(route = Route.GroupSetting.route) {
+            GroupSettingScreen(navController = navController)
         }
     }
 }

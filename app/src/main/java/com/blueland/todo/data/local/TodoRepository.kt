@@ -6,6 +6,10 @@ class TodoRepository(
     private val groupDao: GroupDao,
     private val todoDao: TodoDao
 ) {
+    fun getAllGroupsFlow(): Flow<List<GroupEntity>> {
+        return groupDao.getAllGroupsFlow()
+    }
+
     suspend fun getAllGroups(): List<GroupEntity> {
         return groupDao.getAllGroups()
     }
@@ -48,5 +52,17 @@ class TodoRepository(
 
     suspend fun delete(todo: TodoEntity) {
         todoDao.deleteTodo(todo)
+    }
+
+    suspend fun insert(group: GroupEntity) {
+        groupDao.insertGroup(group)
+    }
+
+    suspend fun update(group: GroupEntity) {
+        groupDao.updateGroup(group)
+    }
+
+    suspend fun delete(group: GroupEntity) {
+        groupDao.deleteGroupAndReassignTodos(group)
     }
 }

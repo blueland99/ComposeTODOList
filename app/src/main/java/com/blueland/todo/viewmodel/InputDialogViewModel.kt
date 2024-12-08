@@ -44,7 +44,6 @@ class InputDialogViewModel @Inject constructor() : ViewModel() {
 
     fun onConfirm(password: String) {
         onConfirmAction(password)
-        hideDialog()
     }
 
     fun onDismiss() {

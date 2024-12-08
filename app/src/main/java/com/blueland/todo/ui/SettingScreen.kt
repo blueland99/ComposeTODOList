@@ -1,22 +1,23 @@
 package com.blueland.todo.ui
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -27,13 +28,13 @@ import com.blueland.todo.data.worker.cancelAllWorkers
 import com.blueland.todo.data.worker.cancelWorker
 import com.blueland.todo.data.worker.scheduleCreateTodo
 import com.blueland.todo.data.worker.scheduleIncompleteTodo
+import com.blueland.todo.navigation.Route
 import com.blueland.todo.ui.component.BaseTopBar
 import com.blueland.todo.ui.component.CustomSwitch
 import com.blueland.todo.ui.theme.LocalColors
 import com.blueland.todo.ui.theme.LocalTextStyles
 import com.blueland.todo.viewmodel.SettingViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingScreen(
     navController: NavHostController,
@@ -55,7 +56,7 @@ fun SettingScreen(
         content = { paddingValues ->
             LazyColumn(
                 modifier = Modifier.padding(paddingValues),
-                contentPadding = PaddingValues(16.dp),
+                contentPadding = PaddingValues(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp)
             ) {
                 // 알림
@@ -147,6 +148,31 @@ fun SettingScreen(
                                 scheduleIncompleteTodo(context)
                             }
                         }
+                    }
+                }
+
+                // 그룹 설정
+                item {
+                    Row(
+                        modifier = Modifier
+                            .clickable {
+                                // 그룹 설정 화면으로 이동
+                                navController.navigate(Route.GroupSetting.route)
+                            },
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            stringResource(R.string.group_setting),
+                            modifier = Modifier.weight(1f),
+                            style = LocalTextStyles.current.mediumBodySm
+                        )
+
+                        Icon(
+                            modifier = Modifier.size(24.dp),
+                            painter = painterResource(R.drawable.ic_arrow_right),
+                            tint = LocalColors.current.text1,
+                            contentDescription = null
+                        )
                     }
                 }
             }

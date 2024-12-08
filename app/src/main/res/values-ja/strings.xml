@@ -41,13 +41,17 @@
     <string name="empty_todo_emoji14">📜</string>
     <string name="empty_todo_emoji15">🧹</string>
 
-    <string name="input_new_todo_title">✨ NEW ✨</string>
-    <string name="input_modify_todo_title">編集</string>
-    <string name="input_hint">タスクを入力してください。</string>
-    <string name="input_hint_toast">タスクを入力してください。</string>
+    <string name="input_new_title">✨ NEW ✨</string>
+    <string name="input_modify_title">編集</string>
+    <string name="todo_hint">タスクを入力してください。</string>
+    <string name="todo_hint_toast">タスクを入力してください。</string>
+    <string name="group_hint">グループ名を入力してください。</string>
+    <string name="group_hint_toast">グループ名を入力してください。</string>
 
     <string name="delete_title">削除</string>
-    <string name="delete_content">このタスクを削除しますか？</string>
+    <string name="delete_todo_content">このタスクを削除しますか？</string>
+    <string name="delete_group_content">グループを削除しますか？</string>
+    <string name="modify_system_group_toast">システムグループは修正できません。</string>
 
     <string name="update_title">更新のお知らせ</string>
     <string name="required_update_content">必須のアップデートがあります！</string>
@@ -68,6 +72,7 @@
     <string name="check_notification">確認通知</string>
     <string name="check_notification_content">毎日午後4時、残りのタスクと完了状況の通知</string>
 
+    <string name="group_setting">グループ設定</string>
     <string name="all">すべて</string>
     <string name="unknown">未指定</string>
 </resources>

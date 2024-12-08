@@ -1,6 +1,5 @@
 package com.blueland.todo.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blueland.todo.data.local.GroupEntity
@@ -32,11 +31,13 @@ class MainViewModel @Inject constructor(
     val completeCount = repository.getCompletedTodoCount()
     val incompleteCount = repository.getIncompleteTodoCount()
 
-    init {
-        viewModelScope.launch {
-            _groupItems.value = repository.getAllGroups()
-            Log.e("TAG", "size = ${groupItems.value.size}")
-            loadTodos()
+    // 그룹 조회
+    suspend fun loadGroups() {
+        _groupItems.value = repository.getAllGroups()
+        groupItems.value.find { it.groupId == selectedGroupId.value }?.groupId.let { groupId ->
+            if (groupId != selectedGroupId.value) {
+                setGroupId(groupId)
+            }
         }
     }
 
@@ -51,7 +52,7 @@ class MainViewModel @Inject constructor(
 
     // 항목 추가
     fun addTodo(title: String) {
-        val newTodo = TodoEntity(title = title)
+        val newTodo = TodoEntity(title = title, groupId = selectedGroupId.value ?: 0)
         viewModelScope.launch {
             repository.insert(newTodo)
             loadTodos()

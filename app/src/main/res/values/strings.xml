@@ -41,13 +41,17 @@
     <string name="empty_todo_emoji14">📜</string>
     <string name="empty_todo_emoji15">🧹</string>
 
-    <string name="input_new_todo_title">✨ NEW ✨</string>
-    <string name="input_modify_todo_title">수정하기</string>
-    <string name="input_hint">할 일을 입력해주세요.</string>
-    <string name="input_hint_toast">할 일을 입력해주세요.</string>
+    <string name="input_new_title">✨ NEW ✨</string>
+    <string name="input_modify_title">수정하기</string>
+    <string name="todo_hint">할 일을 입력해주세요.</string>
+    <string name="todo_hint_toast">할 일을 입력해주세요.</string>
+    <string name="group_hint">그룹명을 입력해주세요.</string>
+    <string name="group_hint_toast">그룹명을 입력해주세요.</string>
 
     <string name="delete_title">삭제하기</string>
-    <string name="delete_content">할 일을 삭제하시겠습니까?</string>
+    <string name="delete_todo_content">할 일을 삭제하시겠습니까?</string>
+    <string name="delete_group_content">그룹을 삭제하시겠습니까?</string>
+    <string name="modify_system_group_toast">시스템 그룹은 수정할 수 없습니다.</string>
 
     <string name="update_title">업데이트 안내</string>
     <string name="required_update_content">필수 업데이트가 필요합니다!</string>
@@ -68,6 +72,7 @@
     <string name="check_notification">확인 알림</string>
     <string name="check_notification_content">매일 오후 4시, 남은 할 일과 완료 상태 알림</string>
 
+    <string name="group_setting">그룹 설정</string>
     <string name="all">전체</string>
     <string name="unknown">미지정</string>
 </resources>

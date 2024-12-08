@@ -1,6 +1,5 @@
 package com.blueland.todo.ui
 
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -17,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,11 +49,12 @@ fun InputDialog(
     // 암호 입력 TextField
     var input by remember { mutableStateOf(content ?: "") }
 
+    LaunchedEffect(content) {
+        input = content ?: ""
+    }
+
     if (isDialogVisible) {
         val shape = LocalShapes.medium
-
-        // Dialog가 표시될 때 초기화
-        input = ""
 
         Dialog(
             onDismissRequest = {
@@ -134,10 +135,6 @@ fun InputDialog(
                         TextButton(
                             modifier = Modifier.weight(1f),
                             onClick = {
-                                if (input.trim().isEmpty()) {
-                                    Toast.makeText(context, context.getString(R.string.input_hint_toast), Toast.LENGTH_SHORT).show()
-                                    return@TextButton
-                                }
                                 viewModel.onConfirm(input.trim())
                             }
                         ) {
