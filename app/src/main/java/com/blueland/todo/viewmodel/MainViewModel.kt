@@ -31,6 +31,12 @@ class MainViewModel @Inject constructor(
     val completeCount = repository.getCompletedTodoCount()
     val incompleteCount = repository.getIncompleteTodoCount()
 
+    init {
+        viewModelScope.launch {
+            loadTodos()
+        }
+    }
+
     // 그룹 조회
     suspend fun loadGroups() {
         _groupItems.value = repository.getAllGroups()
